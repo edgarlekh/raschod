@@ -24,7 +24,7 @@ describe('Card', () => {
         <Text>Наушники</Text>
       </Card>,
     );
-    expect(getByTestId('card')).toHaveProp('style', expect.objectContaining({ backgroundColor: '#14181A' }));
+    expect(getByTestId('card')).toHaveProp('style', expect.objectContaining({ backgroundColor: '#0D1420' }));
   });
 
   it('uses the elevated variant background color when specified', async () => {
@@ -33,6 +33,6 @@ describe('Card', () => {
         <Text>Наушники</Text>
       </Card>,
     );
-    expect(getByTestId('card')).toHaveProp('style', expect.objectContaining({ backgroundColor: '#1D2422' }));
+    expect(getByTestId('card')).toHaveProp('style', expect.objectContaining({ backgroundColor: '#131C2C' }));
   });
 });

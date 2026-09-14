@@ -24,7 +24,7 @@ describe('ThemeProvider / useTheme', () => {
         <Probe />
       </ThemeProvider>,
     );
-    expect(getByTestId('probe').props.children).toBe('#B4F461');
+    expect(getByTestId('probe').props.children).toBe('#7EC8F2');
     spy.mockRestore();
   });
 
@@ -34,7 +34,7 @@ describe('ThemeProvider / useTheme', () => {
         <Probe />
       </ThemeProvider>,
     );
-    expect(getByTestId('probe').props.children).toBe('#4C8A1B');
+    expect(getByTestId('probe').props.children).toBe('#1E7FB8');
   });
 
   it('provides the dark theme when scheme="dark" is passed explicitly', async () => {
@@ -43,7 +43,7 @@ describe('ThemeProvider / useTheme', () => {
         <Probe />
       </ThemeProvider>,
     );
-    expect(getByTestId('probe').props.children).toBe('#B4F461');
+    expect(getByTestId('probe').props.children).toBe('#7EC8F2');
   });
 
   it('throws a clear error when useTheme is called outside a ThemeProvider', async () => {

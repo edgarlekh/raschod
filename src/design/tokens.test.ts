@@ -22,12 +22,12 @@ describe('tokensByScheme', () => {
   });
 
   it('dark theme accent matches the design addendum', () => {
-    expect(tokensByScheme.dark.colors.accent).toBe('#B4F461');
-    expect(tokensByScheme.dark.colors.onAccent).toBe('#0B0F0D');
+    expect(tokensByScheme.dark.colors.accent).toBe('#7EC8F2');
+    expect(tokensByScheme.dark.colors.onAccent).toBe('#06121C');
   });
 
   it('light theme accent matches the design addendum', () => {
-    expect(tokensByScheme.light.colors.accent).toBe('#4C8A1B');
+    expect(tokensByScheme.light.colors.accent).toBe('#1E7FB8');
     expect(tokensByScheme.light.colors.onAccent).toBe('#FFFFFF');
   });
 
