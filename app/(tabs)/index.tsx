@@ -97,7 +97,7 @@ export default function HomeScreen() {
           <AmountText money={money(data.savedFromFrictionMinor, data.currency)} kind="income" style="bodyStrong" />
         </Card>
 
-        <View>
+        <View style={{ gap: theme.spacing.xs }}>
           <Text
             style={{
               color: theme.colors.textPrimary,

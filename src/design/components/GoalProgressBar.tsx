@@ -13,6 +13,8 @@ export function GoalProgressBar({ percent }: GoalProgressBarProps) {
   return (
     <View
       testID="goal-progress-track"
+      accessibilityRole="progressbar"
+      accessibilityValue={{ min: 0, max: 100, now: clamped }}
       style={{
         height: 8,
         borderRadius: theme.radius.pill,

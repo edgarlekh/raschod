@@ -1,5 +1,5 @@
 // src/features/home/useHomeSummary.test.ts
-import { renderHook, waitFor } from '@testing-library/react-native';
+import { renderHook, waitFor, act } from '@testing-library/react-native';
 import { useHomeSummary, type HomeSummaryDeps } from './useHomeSummary';
 import type { TransactionRecord } from '../../data/repositories/TransactionRepository';
 import type { GoalRecord } from '../../data/repositories/GoalRepository';
@@ -89,8 +89,6 @@ function makeDeps(overrides: {
 }
 
 describe('useHomeSummary', () => {
-  jest.setTimeout(30000); // Increase timeout for all tests in this suite
-
   it('starts in a loading state with no data', async () => {
     const deps = makeDeps();
     // Leave the primary-goal fetch pending so the hook is still mid-load when we inspect
@@ -212,7 +210,9 @@ describe('useHomeSummary', () => {
     await waitFor(() => expect(result.current.loading).toBe(false));
 
     expect(deps.transactionRepository.list).toHaveBeenCalledTimes(1);
-    await result.current.refresh();
+    await act(async () => {
+      await result.current.refresh();
+    });
     expect(deps.transactionRepository.list).toHaveBeenCalledTimes(2);
   });
 });

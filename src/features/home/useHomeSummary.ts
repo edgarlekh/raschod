@@ -1,5 +1,5 @@
 // src/features/home/useHomeSummary.ts
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { TransactionRepository } from '../../data/repositories/TransactionRepository';
 import type { GoalRepository } from '../../data/repositories/GoalRepository';
 import type { CategoryRepository } from '../../data/repositories/CategoryRepository';
@@ -53,8 +53,10 @@ export function useHomeSummary(deps: HomeSummaryDeps): UseHomeSummaryResult {
   const [data, setData] = useState<HomeSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  const requestIdRef = useRef(0);
 
   const load = useCallback(async () => {
+    const requestId = ++requestIdRef.current;
     setLoading(true);
     setError(null);
     try {
@@ -65,7 +67,12 @@ export function useHomeSummary(deps: HomeSummaryDeps): UseHomeSummaryResult {
         deps.gamificationRepository.getState(),
       ]);
 
-      const currency = goal?.currency ?? allTransactions[0]?.currency ?? DEFAULT_CURRENCY;
+      if (requestId !== requestIdRef.current) {
+        return; // a newer load() started; discard this stale result
+      }
+
+      const realAllTransactions = allTransactions.filter((t) => !t.wasSkipped);
+      const currency = goal?.currency ?? realAllTransactions[0]?.currency ?? DEFAULT_CURRENCY;
       const homeCurrencyTransactions = allTransactions.filter((t) => t.currency === currency);
       const realTransactions = homeCurrencyTransactions.filter((t) => !t.wasSkipped);
 
@@ -104,13 +111,22 @@ export function useHomeSummary(deps: HomeSummaryDeps): UseHomeSummaryResult {
         recentTransactions,
       });
     } catch (e) {
+      if (requestId !== requestIdRef.current) {
+        return;
+      }
       setError(e instanceof Error ? e : new Error(String(e)));
     } finally {
-      setLoading(false);
+      if (requestId === requestIdRef.current) {
+        setLoading(false);
+      }
     }
   }, [deps.goalRepository, deps.transactionRepository, deps.categoryRepository, deps.gamificationRepository]);
 
   useEffect(() => {
+    // Intentional fetch-on-mount: load() calls setState internally, which is
+    // exactly the async-load pattern this rule normally warns about, but this
+    // effect only runs once per stable `load` identity (see the deps array
+    // above), so it's a deliberate, guarded mount-time fetch, not a footgun.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
   }, [load]);
