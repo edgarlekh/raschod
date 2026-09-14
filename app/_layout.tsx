@@ -1,6 +1,14 @@
 import '../global.css';
 import { Stack } from 'expo-router';
+import { ThemeProvider } from '../src/design/ThemeProvider';
 
 export default function RootLayout() {
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <ThemeProvider>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="capture" options={{ presentation: 'modal' }} />
+      </Stack>
+    </ThemeProvider>
+  );
 }
