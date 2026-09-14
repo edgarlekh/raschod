@@ -1,4 +1,4 @@
-import { money, fromMajor, toMajor, addMoney, subtractMoney, convertMoney } from './money';
+import { money, fromMajor, toMajor, addMoney, subtractMoney, convertMoney, formatMoney } from './money';
 
 describe('money', () => {
   it('rejects non-integer minor amounts', () => {
@@ -45,5 +45,19 @@ describe('convertMoney', () => {
 
   it('rejects a non-positive rate', () => {
     expect(() => convertMoney(money(1000, 'USD'), 'PLN', 0)).toThrow('Exchange rate must be positive');
+  });
+});
+
+describe('formatMoney', () => {
+  it('formats a positive amount with two decimal places and the currency code', () => {
+    expect(formatMoney(money(12550, 'PLN'))).toBe('125.50 PLN');
+  });
+
+  it('formats a whole-number amount with trailing zeros', () => {
+    expect(formatMoney(money(500000, 'USD'))).toBe('5000.00 USD');
+  });
+
+  it('formats a negative amount with a leading minus sign', () => {
+    expect(formatMoney(money(-2500, 'RUB'))).toBe('-25.00 RUB');
   });
 });

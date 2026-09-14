@@ -42,3 +42,7 @@ export function convertMoney(value: Money, toCurrency: CurrencyCode, rate: numbe
   }
   return money(Math.round(value.amountMinor * rate), toCurrency);
 }
+
+export function formatMoney(value: Money): string {
+  return `${toMajor(value).toFixed(2)} ${value.currency}`;
+}
