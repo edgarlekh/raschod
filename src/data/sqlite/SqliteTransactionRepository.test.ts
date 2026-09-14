@@ -1,10 +1,20 @@
 // src/data/sqlite/SqliteTransactionRepository.test.ts
 import { createTestDb } from '../../../test-utils/createTestDb';
+import { categories } from '../../db/schema';
 import { SqliteTransactionRepository } from './SqliteTransactionRepository';
 
 describe('SqliteTransactionRepository', () => {
   function setup() {
     const db = createTestDb();
+    // The real schema enforces a foreign key from transactions.categoryId to
+    // categories.id, so seed the category ids the tests reference.
+    db.insert(categories)
+      .values([
+        { id: 'cat-food', name: 'Еда', icon: 'utensils', color: '#F97316', isCustom: false },
+        { id: 'cat-salary', name: 'Зарплата', icon: 'wallet', color: '#10B981', isCustom: false },
+        { id: 'cat-transport', name: 'Транспорт', icon: 'car', color: '#3B82F6', isCustom: false },
+      ])
+      .run();
     return new SqliteTransactionRepository(db);
   }
 

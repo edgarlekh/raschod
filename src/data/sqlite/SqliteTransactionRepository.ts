@@ -1,5 +1,5 @@
 // src/data/sqlite/SqliteTransactionRepository.ts
-import { and, eq, gte, lte } from 'drizzle-orm';
+import { and, desc, eq, gte, lte } from 'drizzle-orm';
 import { transactions } from '../../db/schema';
 import type { AppDatabase } from '../../db/types';
 import { generateId } from '../../lib/id';
@@ -38,8 +38,12 @@ export class SqliteTransactionRepository implements TransactionRepository {
 
     const rows =
       conditions.length > 0
-        ? await this.db.select().from(transactions).where(and(...conditions))
-        : await this.db.select().from(transactions);
+        ? await this.db
+            .select()
+            .from(transactions)
+            .where(and(...conditions))
+            .orderBy(desc(transactions.createdAt))
+        : await this.db.select().from(transactions).orderBy(desc(transactions.createdAt));
 
     return rows.map(toRecord);
   }

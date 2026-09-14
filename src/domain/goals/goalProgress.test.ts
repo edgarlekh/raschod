@@ -30,4 +30,12 @@ describe('calculateGoalProgress', () => {
       'Goal target amount must be positive',
     );
   });
+
+  it('does not report 100% complete when the goal is not actually complete', () => {
+    expect(calculateGoalProgress({ targetAmountMinor: 10000, currentAmountMinor: 9999 })).toEqual({
+      percentComplete: 99,
+      remainingMinor: 1,
+      isComplete: false,
+    });
+  });
 });

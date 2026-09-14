@@ -9,7 +9,7 @@ import type {
   CreateCategoryInput,
 } from '../repositories/CategoryRepository';
 
-export const DEFAULT_CATEGORIES: Array<Omit<CreateCategoryInput, 'isCustom'>> = [
+export const DEFAULT_CATEGORIES: CreateCategoryInput[] = [
   { name: 'Еда', icon: 'utensils', color: '#F97316' },
   { name: 'Транспорт', icon: 'car', color: '#3B82F6' },
   { name: 'Жильё', icon: 'home', color: '#8B5CF6' },

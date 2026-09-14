@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import { badges, gamificationState } from '../../db/schema';
 import type { AppDatabase } from '../../db/types';
 import { generateId } from '../../lib/id';
@@ -25,7 +25,7 @@ export class SqliteGamificationRepository implements GamificationRepository {
   async getState(): Promise<GamificationStateRecord> {
     const rows = await this.db.select().from(gamificationState).where(eq(gamificationState.id, SINGLETON_ID));
     if (!rows[0]) {
-      return DEFAULT_STATE;
+      return { ...DEFAULT_STATE };
     }
     return toStateRecord(rows[0]);
   }
@@ -47,8 +47,8 @@ export class SqliteGamificationRepository implements GamificationRepository {
   }
 
   async listBadges(): Promise<BadgeRecord[]> {
-    const rows = await this.db.select().from(badges);
-    return rows;
+    const rows = await this.db.select().from(badges).orderBy(desc(badges.earnedAt));
+    return rows.map(toRecord);
   }
 
   async awardBadge(badgeKey: string): Promise<BadgeRecord> {
@@ -67,4 +67,8 @@ function toStateRecord(row: typeof gamificationState.$inferSelect): Gamification
     lastActivityDate: row.lastActivityDate,
     totalSavedMinor: row.totalSavedMinor,
   };
+}
+
+function toRecord(row: typeof badges.$inferSelect): BadgeRecord {
+  return { id: row.id, badgeKey: row.badgeKey, earnedAt: row.earnedAt };
 }

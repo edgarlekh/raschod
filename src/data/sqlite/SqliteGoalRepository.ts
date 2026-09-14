@@ -1,5 +1,5 @@
 // src/data/sqlite/SqliteGoalRepository.ts
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import { goals } from '../../db/schema';
 import type { AppDatabase } from '../../db/types';
 import { generateId } from '../../lib/id';
@@ -24,12 +24,12 @@ export class SqliteGoalRepository implements GoalRepository {
   }
 
   async listAll(): Promise<GoalRecord[]> {
-    const rows = await this.db.select().from(goals);
+    const rows = await this.db.select().from(goals).orderBy(desc(goals.createdAt));
     return rows.map(toRecord);
   }
 
   async getPrimary(): Promise<GoalRecord | null> {
-    const rows = await this.db.select().from(goals).where(eq(goals.isPrimary, true));
+    const rows = await this.db.select().from(goals).where(eq(goals.isPrimary, true)).limit(1);
     return rows[0] ? toRecord(rows[0]) : null;
   }
 

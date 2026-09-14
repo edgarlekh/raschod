@@ -14,7 +14,7 @@ export function calculateGoalProgress(input: GoalProgressInput): GoalProgress {
     throw new Error('Goal target amount must be positive');
   }
   const clampedCurrent = Math.max(0, input.currentAmountMinor);
-  const percentComplete = Math.min(100, Math.round((clampedCurrent / input.targetAmountMinor) * 100));
+  const percentComplete = Math.min(100, Math.floor((clampedCurrent / input.targetAmountMinor) * 100));
   const remainingMinor = Math.max(0, input.targetAmountMinor - clampedCurrent);
   return { percentComplete, remainingMinor, isComplete: clampedCurrent >= input.targetAmountMinor };
 }

@@ -42,4 +42,9 @@ describe('updateStreak', () => {
       lastActivityDate: '2026-09-14',
     });
   });
+
+  it('leaves the state unchanged when the activity date is before lastActivityDate', () => {
+    const state: StreakState = { currentStreakDays: 3, longestStreakDays: 5, lastActivityDate: '2026-09-14' };
+    expect(updateStreak(state, '2026-09-10')).toEqual(state);
+  });
 });

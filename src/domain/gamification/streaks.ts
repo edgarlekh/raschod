@@ -24,6 +24,10 @@ export function updateStreak(state: StreakState, activityDate: string): StreakSt
     return state;
   }
 
+  if (diff < 0 || Number.isNaN(diff)) {
+    return state;
+  }
+
   if (diff === 1) {
     const currentStreakDays = state.currentStreakDays + 1;
     return {
