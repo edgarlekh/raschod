@@ -6,6 +6,7 @@ import type { AppDatabase } from '../src/db/types';
 export function createTestDb(): AppDatabase {
   const sqlite = new Database(':memory:');
   sqlite.exec(`
+    PRAGMA foreign_keys = OFF;
     CREATE TABLE categories (
       id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
