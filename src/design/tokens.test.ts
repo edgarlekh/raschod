@@ -9,7 +9,7 @@ describe('tokensByScheme', () => {
 
   it('every color in both themes is a valid hex or rgba value', () => {
     for (const scheme of ['light', 'dark'] as const) {
-      for (const [key, value] of Object.entries(tokensByScheme[scheme].colors)) {
+      for (const value of Object.values(tokensByScheme[scheme].colors)) {
         expect(value).toMatch(HEX_OR_RGBA);
       }
     }
