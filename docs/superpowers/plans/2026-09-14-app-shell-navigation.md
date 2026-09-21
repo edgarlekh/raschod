@@ -33,7 +33,7 @@
 **Interfaces:**
 - Produces: a working Expo Router entry point. No new exported TS interfaces.
 
-- [ ] **Step 1: Install dependencies**
+- [x] **Step 1: Install dependencies**
 
 Run:
 ```bash
@@ -41,14 +41,14 @@ npx expo install expo-router react-native-screens expo-linking expo-constants
 ```
 (`react-native-safe-area-context` and `react-native-reanimated` are already installed from Plan 2 Task 1.)
 
-- [ ] **Step 2: Update `package.json`'s entry point**
+- [x] **Step 2: Update `package.json`'s entry point**
 
 Change `"main": "index.ts"` to:
 ```json
 "main": "expo-router/entry",
 ```
 
-- [ ] **Step 3: Update `app.json`**
+- [x] **Step 3: Update `app.json`**
 
 ```json
 {
@@ -80,13 +80,13 @@ Change `"main": "index.ts"` to:
 }
 ```
 
-- [ ] **Step 4: Remove the old template entry files**
+- [x] **Step 4: Remove the old template entry files**
 
 ```bash
 git rm App.tsx index.ts
 ```
 
-- [ ] **Step 5: Create the minimal root layout**
+- [x] **Step 5: Create the minimal root layout**
 
 ```tsx
 // app/_layout.tsx
@@ -98,7 +98,7 @@ export default function RootLayout() {
 }
 ```
 
-- [ ] **Step 6: Create a minimal placeholder index route**
+- [x] **Step 6: Create a minimal placeholder index route**
 
 ```tsx
 // app/index.tsx
@@ -113,12 +113,12 @@ export default function IndexScreen() {
 }
 ```
 
-- [ ] **Step 7: Verify**
+- [x] **Step 7: Verify**
 
 Run: `npm run typecheck && npm run lint`
 Expected: both clean. `npm test` is not run as a pass/fail gate for this step — this task adds no tests (route/config only) — but confirm it still reports the same test count as before this task, so you know nothing else broke.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add -A
@@ -139,7 +139,7 @@ Manual verification note (cannot be automated in this environment): after this t
 - Consumes: `useTheme` from `src/design/ThemeProvider.tsx` (Plan 2).
 - Produces: `Screen` component with props `{ children: React.ReactNode }` — every route screen wraps its content in this, giving every screen the correct themed background and safe-area insets for free.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```tsx
 // src/design/components/Screen.test.tsx
@@ -175,12 +175,12 @@ describe('Screen', () => {
 
 If `render` is not async in the installed `@testing-library/react-native` version, drop the `await` — check what the rest of the `src/design` test suite already does (Tasks 3-6 of the previous plan settled this) and match it.
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- Screen.test.tsx`
 Expected: FAIL — `Cannot find module './Screen'`
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```tsx
 // src/design/components/Screen.tsx
@@ -203,12 +203,12 @@ export function Screen({ children }: ScreenProps) {
 }
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `npm test -- Screen.test.tsx`
 Expected: PASS (1 test)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/design/components/Screen.tsx src/design/components/Screen.test.tsx
@@ -227,7 +227,7 @@ git commit -m "feat: add Screen primitive with themed background and safe-area i
 - Consumes: `useTheme` from `src/design/ThemeProvider.tsx` (Plan 2).
 - Produces: `TabBarItem` (`{ key: string; label: string }`), `CustomTabBar` component with props `{ tabs: TabBarItem[]; activeKey: string; onTabPress: (key: string) => void; onCapturePress: () => void }` — a plain, framework-agnostic component with no `expo-router` import, so it is fully unit-testable and reusable if the routing library ever changes.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```tsx
 // src/navigation/CustomTabBar.test.tsx
@@ -285,12 +285,12 @@ describe('CustomTabBar', () => {
 
 If the "marks the active tab" test's exact prop-traversal (`.props.parent?.props...`) doesn't match how testing-library exposes the pressable ancestor in the installed version, query by role/label instead — e.g. `getByRole('tab', { name: 'Цели' })` and assert on `.props.accessibilityState.selected` directly. Adapt and document; the intent (active tab is marked selected) is what matters.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `npm test -- CustomTabBar.test.tsx`
 Expected: FAIL — `Cannot find module './CustomTabBar'`
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```tsx
 // src/navigation/CustomTabBar.tsx
@@ -369,12 +369,12 @@ export function CustomTabBar({ tabs, activeKey, onTabPress, onCapturePress }: Cu
 }
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `npm test -- CustomTabBar.test.tsx`
 Expected: PASS (4 tests)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/navigation/CustomTabBar.tsx src/navigation/CustomTabBar.test.tsx
@@ -393,7 +393,7 @@ git commit -m "feat: add CustomTabBar with a floating quick-capture button"
 - Consumes: `TabBarItem` from `src/navigation/CustomTabBar.tsx` (Task 3).
 - Produces: `TAB_LABELS` (route-name → display-label map), `toCustomTabBarProps(routeNames, activeRouteName, onTabPress, onCapturePress)` — a plain function with no `expo-router` or React Navigation import, called from the real tab layout route file (Task 5) to build `CustomTabBar`'s props from whatever shape React Navigation's `tabBar` render-prop actually hands it. Keeping this mapping in a tested, framework-free function means the untested route file (Task 5) is a one-line call, not logic.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```typescript
 // src/navigation/tabBarAdapter.test.ts
@@ -444,12 +444,12 @@ describe('toCustomTabBarProps', () => {
 });
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `npm test -- tabBarAdapter.test.ts`
 Expected: FAIL — `Cannot find module './tabBarAdapter'`
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```typescript
 // src/navigation/tabBarAdapter.ts
@@ -477,12 +477,12 @@ export function toCustomTabBarProps(
 }
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `npm test -- tabBarAdapter.test.ts`
 Expected: PASS (3 tests)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/navigation/tabBarAdapter.ts src/navigation/tabBarAdapter.test.ts
@@ -507,7 +507,7 @@ git commit -m "feat: add tabBarAdapter mapping route state to CustomTabBar props
 - Consumes: `ThemeProvider` (Plan 2), `Screen` (Task 2), `CustomTabBar` (Task 3), `toCustomTabBarProps` (Task 4).
 - Produces: the app's real navigable shell. No new exported TS interfaces — this task is composition, not logic, and per the Global Constraints is verified by typecheck, not a new automated test.
 
-- [ ] **Step 1: Replace the root layout**
+- [x] **Step 1: Replace the root layout**
 
 ```tsx
 // app/_layout.tsx
@@ -527,13 +527,13 @@ export default function RootLayout() {
 }
 ```
 
-- [ ] **Step 2: Remove the Task-1 placeholder index route**
+- [x] **Step 2: Remove the Task-1 placeholder index route**
 
 ```bash
 git rm app/index.tsx
 ```
 
-- [ ] **Step 3: Create the tabs layout**
+- [x] **Step 3: Create the tabs layout**
 
 ```tsx
 // app/(tabs)/_layout.tsx
@@ -568,7 +568,7 @@ export default function TabsLayout() {
 
 If the installed `expo-router`/React Navigation version's `tabBar` render-prop shape differs from `props.state.routes` / `props.state.index` / `props.navigation.navigate` (e.g. a renamed field), inspect the actual type error TypeScript reports and adapt to the real shape — document the exact difference found in your report so the next reader isn't surprised.
 
-- [ ] **Step 4: Create the four placeholder tab screens**
+- [x] **Step 4: Create the four placeholder tab screens**
 
 ```tsx
 // app/(tabs)/index.tsx
@@ -626,7 +626,7 @@ export default function SettingsScreen() {
 }
 ```
 
-- [ ] **Step 5: Create the capture modal placeholder**
+- [x] **Step 5: Create the capture modal placeholder**
 
 ```tsx
 // app/capture.tsx
@@ -642,12 +642,12 @@ export default function CaptureScreen() {
 }
 ```
 
-- [ ] **Step 6: Verify**
+- [x] **Step 6: Verify**
 
 Run: `npm run typecheck && npm run lint && npm test`
 Expected: typecheck and lint clean; test count unchanged from before this task (this task adds no new tests — it wires already-tested pieces together in route files, per the Global Constraints).
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add -A

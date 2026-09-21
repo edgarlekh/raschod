@@ -33,7 +33,7 @@
 **Interfaces:**
 - Produces: `npm test`, `npm run typecheck`, `npm run lint` scripts every later task and CI relies on.
 
-- [ ] **Step 1: Install dependencies**
+- [x] **Step 1: Install dependencies**
 
 Run:
 ```bash
@@ -42,12 +42,12 @@ npm install drizzle-orm
 npm install -D drizzle-kit better-sqlite3 @types/better-sqlite3 jest-expo jest @types/jest
 ```
 
-- [ ] **Step 2: Set up ESLint via the Expo CLI**
+- [x] **Step 2: Set up ESLint via the Expo CLI**
 
 Run: `npx expo lint`
 Expected: creates `eslint.config.js` and adds `eslint-config-expo` to `devDependencies`.
 
-- [ ] **Step 3: Create Jest config**
+- [x] **Step 3: Create Jest config**
 
 ```js
 // jest.config.js
@@ -59,7 +59,7 @@ module.exports = {
 };
 ```
 
-- [ ] **Step 4: Add scripts to package.json**
+- [x] **Step 4: Add scripts to package.json**
 
 Add under `"scripts"` in `package.json` (keep the existing `start`/`android`/`ios`/`web` entries):
 ```json
@@ -70,18 +70,18 @@ Add under `"scripts"` in `package.json` (keep the existing `start`/`android`/`io
 "db:generate": "drizzle-kit generate"
 ```
 
-- [ ] **Step 5: Create a placeholder so `src/` exists for the next task**
+- [x] **Step 5: Create a placeholder so `src/` exists for the next task**
 
 ```bash
 mkdir -p src/lib && touch src/lib/.gitkeep
 ```
 
-- [ ] **Step 6: Verify the toolchain**
+- [x] **Step 6: Verify the toolchain**
 
 Run: `npm run typecheck && npm run lint && npm test`
 Expected: `typecheck` and `lint` pass with no errors; `test` reports "No tests found" (exit code 0 is fine at this stage — Jest with no test files still exits non-zero by default, so expect and note the "no tests found" message; this is resolved once Task 2 adds a real test).
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add package.json package-lock.json jest.config.js eslint.config.js src/lib/.gitkeep
@@ -99,7 +99,7 @@ git commit -m "chore: set up lint, typecheck, and jest-expo test runner"
 **Interfaces:**
 - Produces: `Money`, `money()`, `fromMajor()`, `toMajor()`, `addMoney()`, `subtractMoney()`, `convertMoney()` — used by every domain module from Task 4 onward.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```typescript
 // src/lib/money.test.ts
@@ -154,12 +154,12 @@ describe('convertMoney', () => {
 });
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `npm test -- money.test.ts`
 Expected: FAIL — `Cannot find module './money'`
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```typescript
 // src/lib/money.ts
@@ -209,12 +209,12 @@ export function convertMoney(value: Money, toCurrency: CurrencyCode, rate: numbe
 }
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `npm test -- money.test.ts`
 Expected: PASS (9 tests)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git rm src/lib/.gitkeep
@@ -234,7 +234,7 @@ git commit -m "feat: add Money value type with integer minor-unit arithmetic"
 **Interfaces:**
 - Produces: `generateId(): string` — used by every SQLite repository implementation from Task 10 onward.
 
-- [ ] **Step 1: Create the expo-crypto Jest mock (needed before the test can run in Node)**
+- [x] **Step 1: Create the expo-crypto Jest mock (needed before the test can run in Node)**
 
 ```javascript
 // __mocks__/expo-crypto.js
@@ -245,7 +245,7 @@ module.exports = {
 };
 ```
 
-- [ ] **Step 2: Write the failing test**
+- [x] **Step 2: Write the failing test**
 
 ```typescript
 // src/lib/id.test.ts
@@ -262,12 +262,12 @@ describe('generateId', () => {
 });
 ```
 
-- [ ] **Step 3: Run test to verify it fails**
+- [x] **Step 3: Run test to verify it fails**
 
 Run: `npm test -- id.test.ts`
 Expected: FAIL — `Cannot find module './id'`
 
-- [ ] **Step 4: Implement**
+- [x] **Step 4: Implement**
 
 ```typescript
 // src/lib/id.ts
@@ -278,12 +278,12 @@ export function generateId(): string {
 }
 ```
 
-- [ ] **Step 5: Run test to verify it passes**
+- [x] **Step 5: Run test to verify it passes**
 
 Run: `npm test -- id.test.ts`
 Expected: PASS
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/lib/id.ts src/lib/id.test.ts __mocks__/expo-crypto.js
@@ -302,7 +302,7 @@ git commit -m "feat: add generateId backed by expo-crypto randomUUID"
 - Consumes: nothing (pure domain module).
 - Produces: `FrictionTier`, `FrictionThresholds`, `DEFAULT_FRICTION_THRESHOLDS`, `FrictionDecision`, `decideFriction(amountInBaseMinor, thresholds?)` — consumed by the add-transaction flow (next plan) and by Task 6 (XP awarding).
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```typescript
 // src/domain/friction/frictionEngine.test.ts
@@ -347,12 +347,12 @@ describe('decideFriction', () => {
 });
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `npm test -- frictionEngine.test.ts`
 Expected: FAIL — `Cannot find module './frictionEngine'`
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```typescript
 // src/domain/friction/frictionEngine.ts
@@ -396,12 +396,12 @@ export function decideFriction(
 }
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `npm test -- frictionEngine.test.ts`
 Expected: PASS (7 tests)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/domain/friction
@@ -421,7 +421,7 @@ git commit -m "feat: add friction engine deciding question tiers by amount"
 **Interfaces:**
 - Produces: `calculateGoalProgress(input): GoalProgress`, `calculateOpportunityCost(amountMinor, goal): OpportunityCostResult | null` — consumed by the goal screen and the friction modal (next plan).
 
-- [ ] **Step 1: Write the failing test for goal progress**
+- [x] **Step 1: Write the failing test for goal progress**
 
 ```typescript
 // src/domain/goals/goalProgress.test.ts
@@ -460,12 +460,12 @@ describe('calculateGoalProgress', () => {
 });
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- goalProgress.test.ts`
 Expected: FAIL — `Cannot find module './goalProgress'`
 
-- [ ] **Step 3: Implement goal progress**
+- [x] **Step 3: Implement goal progress**
 
 ```typescript
 // src/domain/goals/goalProgress.ts
@@ -491,12 +491,12 @@ export function calculateGoalProgress(input: GoalProgressInput): GoalProgress {
 }
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `npm test -- goalProgress.test.ts`
 Expected: PASS (4 tests)
 
-- [ ] **Step 5: Write the failing test for opportunity cost**
+- [x] **Step 5: Write the failing test for opportunity cost**
 
 ```typescript
 // src/domain/goals/opportunityCost.test.ts
@@ -527,12 +527,12 @@ describe('calculateOpportunityCost', () => {
 });
 ```
 
-- [ ] **Step 6: Run test to verify it fails**
+- [x] **Step 6: Run test to verify it fails**
 
 Run: `npm test -- opportunityCost.test.ts`
 Expected: FAIL — `Cannot find module './opportunityCost'`
 
-- [ ] **Step 7: Implement opportunity cost**
+- [x] **Step 7: Implement opportunity cost**
 
 ```typescript
 // src/domain/goals/opportunityCost.ts
@@ -559,12 +559,12 @@ export function calculateOpportunityCost(
 }
 ```
 
-- [ ] **Step 8: Run test to verify it passes**
+- [x] **Step 8: Run test to verify it passes**
 
 Run: `npm test -- opportunityCost.test.ts`
 Expected: PASS (4 tests)
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add src/domain/goals
@@ -585,7 +585,7 @@ git commit -m "feat: add goal progress and opportunity-cost calculators"
 - Consumes: `FrictionTier` from Task 4 (`src/domain/friction/frictionEngine.ts`).
 - Produces: `calculateXpGain(tier, wasSkipped)`, `calculateLevel(totalXp): LevelInfo`, `updateStreak(state, activityDate): StreakState` — consumed by `GamificationRepository` (Task 13) and the friction-result handler (next plan).
 
-- [ ] **Step 1: Write the failing test for XP**
+- [x] **Step 1: Write the failing test for XP**
 
 ```typescript
 // src/domain/gamification/xp.test.ts
@@ -623,12 +623,12 @@ describe('calculateLevel', () => {
 });
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- xp.test.ts`
 Expected: FAIL — `Cannot find module './xp'`
 
-- [ ] **Step 3: Implement XP and levels**
+- [x] **Step 3: Implement XP and levels**
 
 ```typescript
 // src/domain/gamification/xp.ts
@@ -666,12 +666,12 @@ export function calculateLevel(totalXp: number): LevelInfo {
 }
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `npm test -- xp.test.ts`
 Expected: PASS (6 tests)
 
-- [ ] **Step 5: Write the failing test for streaks**
+- [x] **Step 5: Write the failing test for streaks**
 
 ```typescript
 // src/domain/gamification/streaks.test.ts
@@ -722,12 +722,12 @@ describe('updateStreak', () => {
 });
 ```
 
-- [ ] **Step 6: Run test to verify it fails**
+- [x] **Step 6: Run test to verify it fails**
 
 Run: `npm test -- streaks.test.ts`
 Expected: FAIL — `Cannot find module './streaks'`
 
-- [ ] **Step 7: Implement streaks**
+- [x] **Step 7: Implement streaks**
 
 ```typescript
 // src/domain/gamification/streaks.ts
@@ -774,12 +774,12 @@ export function updateStreak(state: StreakState, activityDate: string): StreakSt
 }
 ```
 
-- [ ] **Step 8: Run test to verify it passes**
+- [x] **Step 8: Run test to verify it passes**
 
 Run: `npm test -- streaks.test.ts`
 Expected: PASS (5 tests)
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add src/domain/gamification
@@ -797,7 +797,7 @@ git commit -m "feat: add XP, level, and streak calculators"
 **Interfaces:**
 - Produces: `PlanTier`, `FeatureFlag`, `EntitlementsService`, `createEntitlementsService(plan?)` — every future premium-gated feature reads `hasFeature()` from this service instead of hardcoding access.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```typescript
 // src/core/entitlements/entitlements.test.ts
@@ -825,12 +825,12 @@ describe('createEntitlementsService', () => {
 });
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- entitlements.test.ts`
 Expected: FAIL — `Cannot find module './entitlements'`
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```typescript
 // src/core/entitlements/entitlements.ts
@@ -876,12 +876,12 @@ export function createEntitlementsService(plan: PlanTier = 'free'): Entitlements
 }
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `npm test -- entitlements.test.ts`
 Expected: PASS (3 tests)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/core/entitlements
@@ -899,7 +899,7 @@ git commit -m "feat: add entitlements service defaulting to the free plan"
 **Interfaces:**
 - Produces: `categories`, `goals`, `transactions`, `gamificationState`, `badges` table definitions — consumed by every repository from Task 10 onward and by `test-utils/createTestDb.ts` (Task 9).
 
-- [ ] **Step 1: Write the schema**
+- [x] **Step 1: Write the schema**
 
 ```typescript
 // src/db/schema.ts
@@ -955,7 +955,7 @@ export const badges = sqliteTable('badges', {
 });
 ```
 
-- [ ] **Step 2: Write the Drizzle Kit config**
+- [x] **Step 2: Write the Drizzle Kit config**
 
 ```typescript
 // drizzle.config.ts
@@ -969,17 +969,17 @@ export default defineConfig({
 });
 ```
 
-- [ ] **Step 3: Generate the migration bundle for the Expo app**
+- [x] **Step 3: Generate the migration bundle for the Expo app**
 
 Run: `npm run db:generate`
 Expected: creates `./drizzle/0000_*.sql` and `./drizzle/migrations.js` (the bundle `useMigrations` will load once the app wires it up in the next plan).
 
-- [ ] **Step 4: Typecheck**
+- [x] **Step 4: Typecheck**
 
 Run: `npm run typecheck`
 Expected: no errors.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/db/schema.ts drizzle.config.ts drizzle
@@ -999,7 +999,7 @@ git commit -m "feat: add Drizzle schema and generate Expo migration bundle"
 - Consumes: `categories`, `goals`, `transactions`, `gamificationState`, `badges` from `src/db/schema.ts` (Task 8).
 - Produces: `AppDatabase` type, `db` (the app's live Expo database instance), `createTestDb(): AppDatabase` — every repository test from Task 10 onward calls `createTestDb()` to get a fresh in-memory database whose tables mirror `src/db/schema.ts` exactly.
 
-- [ ] **Step 1: Define the shared database type**
+- [x] **Step 1: Define the shared database type**
 
 ```typescript
 // src/db/types.ts
@@ -1010,7 +1010,7 @@ import type * as schema from './schema';
 export type AppDatabase = BetterSQLite3Database<typeof schema> | ExpoSQLiteDatabase<typeof schema>;
 ```
 
-- [ ] **Step 2: Create the app's live database client**
+- [x] **Step 2: Create the app's live database client**
 
 ```typescript
 // src/db/client.ts
@@ -1023,7 +1023,7 @@ const expoDb = SQLite.openDatabaseSync('raschod.db');
 export const db = drizzle(expoDb, { schema });
 ```
 
-- [ ] **Step 3: Create the in-memory test database helper**
+- [x] **Step 3: Create the in-memory test database helper**
 
 ```typescript
 // test-utils/createTestDb.ts
@@ -1082,12 +1082,12 @@ export function createTestDb(): AppDatabase {
 }
 ```
 
-- [ ] **Step 4: Typecheck**
+- [x] **Step 4: Typecheck**
 
 Run: `npm run typecheck`
 Expected: no errors.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/db/types.ts src/db/client.ts test-utils/createTestDb.ts
@@ -1107,7 +1107,7 @@ git commit -m "chore: add app database client and in-memory test database helper
 - Consumes: `transactions` schema (Task 8), `AppDatabase` (Task 9), `generateId` (Task 3).
 - Produces: `TransactionRepository`, `SqliteTransactionRepository` — consumed by the add-transaction and history screens (next plan).
 
-- [ ] **Step 1: Write the repository interface**
+- [x] **Step 1: Write the repository interface**
 
 ```typescript
 // src/data/repositories/TransactionRepository.ts
@@ -1148,7 +1148,7 @@ export interface TransactionRepository {
 }
 ```
 
-- [ ] **Step 2: Write the failing repository tests**
+- [x] **Step 2: Write the failing repository tests**
 
 ```typescript
 // src/data/sqlite/SqliteTransactionRepository.test.ts
@@ -1221,12 +1221,12 @@ describe('SqliteTransactionRepository', () => {
 });
 ```
 
-- [ ] **Step 3: Run tests to verify they fail**
+- [x] **Step 3: Run tests to verify they fail**
 
 Run: `npm test -- SqliteTransactionRepository.test.ts`
 Expected: FAIL — `Cannot find module './SqliteTransactionRepository'`
 
-- [ ] **Step 4: Implement**
+- [x] **Step 4: Implement**
 
 ```typescript
 // src/data/sqlite/SqliteTransactionRepository.ts
@@ -1300,12 +1300,12 @@ function toRecord(row: typeof transactions.$inferSelect): TransactionRecord {
 }
 ```
 
-- [ ] **Step 5: Run tests to verify they pass**
+- [x] **Step 5: Run tests to verify they pass**
 
 Run: `npm test -- SqliteTransactionRepository.test.ts`
 Expected: PASS (6 tests)
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/data/repositories/TransactionRepository.ts src/data/sqlite/SqliteTransactionRepository.ts src/data/sqlite/SqliteTransactionRepository.test.ts
@@ -1325,7 +1325,7 @@ git commit -m "feat: add SQLite-backed TransactionRepository"
 - Consumes: `categories` schema (Task 8), `AppDatabase` (Task 9), `generateId` (Task 3).
 - Produces: `CategoryRepository`, `SqliteCategoryRepository`, `DEFAULT_CATEGORIES` — consumed by the add-transaction and category-management screens (next plan).
 
-- [ ] **Step 1: Write the repository interface**
+- [x] **Step 1: Write the repository interface**
 
 ```typescript
 // src/data/repositories/CategoryRepository.ts
@@ -1351,7 +1351,7 @@ export interface CategoryRepository {
 }
 ```
 
-- [ ] **Step 2: Write the failing repository tests**
+- [x] **Step 2: Write the failing repository tests**
 
 ```typescript
 // src/data/sqlite/SqliteCategoryRepository.test.ts
@@ -1400,12 +1400,12 @@ describe('SqliteCategoryRepository', () => {
 });
 ```
 
-- [ ] **Step 3: Run tests to verify they fail**
+- [x] **Step 3: Run tests to verify they fail**
 
 Run: `npm test -- SqliteCategoryRepository.test.ts`
 Expected: FAIL — `Cannot find module './SqliteCategoryRepository'`
 
-- [ ] **Step 4: Implement**
+- [x] **Step 4: Implement**
 
 ```typescript
 // src/data/sqlite/SqliteCategoryRepository.ts
@@ -1465,12 +1465,12 @@ function toRecord(row: typeof categories.$inferSelect): CategoryRecord {
 }
 ```
 
-- [ ] **Step 5: Run tests to verify they pass**
+- [x] **Step 5: Run tests to verify they pass**
 
 Run: `npm test -- SqliteCategoryRepository.test.ts`
 Expected: PASS (5 tests)
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/data/repositories/CategoryRepository.ts src/data/sqlite/SqliteCategoryRepository.ts src/data/sqlite/SqliteCategoryRepository.test.ts
@@ -1490,7 +1490,7 @@ git commit -m "feat: add SQLite-backed CategoryRepository with default categorie
 - Consumes: `goals` schema (Task 8), `AppDatabase` (Task 9), `generateId` (Task 3).
 - Produces: `GoalRepository`, `SqliteGoalRepository` — consumed by the goals screen and the friction opportunity-cost lookup (next plan).
 
-- [ ] **Step 1: Write the repository interface**
+- [x] **Step 1: Write the repository interface**
 
 ```typescript
 // src/data/repositories/GoalRepository.ts
@@ -1522,7 +1522,7 @@ export interface GoalRepository {
 }
 ```
 
-- [ ] **Step 2: Write the failing repository tests**
+- [x] **Step 2: Write the failing repository tests**
 
 ```typescript
 // src/data/sqlite/SqliteGoalRepository.test.ts
@@ -1584,12 +1584,12 @@ describe('SqliteGoalRepository', () => {
 });
 ```
 
-- [ ] **Step 3: Run tests to verify they fail**
+- [x] **Step 3: Run tests to verify they fail**
 
 Run: `npm test -- SqliteGoalRepository.test.ts`
 Expected: FAIL — `Cannot find module './SqliteGoalRepository'`
 
-- [ ] **Step 4: Implement**
+- [x] **Step 4: Implement**
 
 ```typescript
 // src/data/sqlite/SqliteGoalRepository.ts
@@ -1656,12 +1656,12 @@ function toRecord(row: typeof goals.$inferSelect): GoalRecord {
 }
 ```
 
-- [ ] **Step 5: Run tests to verify they pass**
+- [x] **Step 5: Run tests to verify they pass**
 
 Run: `npm test -- SqliteGoalRepository.test.ts`
 Expected: PASS (7 tests)
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/data/repositories/GoalRepository.ts src/data/sqlite/SqliteGoalRepository.ts src/data/sqlite/SqliteGoalRepository.test.ts
@@ -1681,7 +1681,7 @@ git commit -m "feat: add SQLite-backed GoalRepository"
 - Consumes: `gamificationState`, `badges` schema (Task 8), `AppDatabase` (Task 9), `generateId` (Task 3).
 - Produces: `GamificationRepository`, `SqliteGamificationRepository` — consumed by the home screen counter, XP/level display, and badge shelf (next plan).
 
-- [ ] **Step 1: Write the repository interface**
+- [x] **Step 1: Write the repository interface**
 
 ```typescript
 // src/data/repositories/GamificationRepository.ts
@@ -1708,7 +1708,7 @@ export interface GamificationRepository {
 }
 ```
 
-- [ ] **Step 2: Write the failing repository tests**
+- [x] **Step 2: Write the failing repository tests**
 
 ```typescript
 // src/data/sqlite/SqliteGamificationRepository.test.ts
@@ -1767,12 +1767,12 @@ describe('SqliteGamificationRepository', () => {
 });
 ```
 
-- [ ] **Step 3: Run tests to verify they fail**
+- [x] **Step 3: Run tests to verify they fail**
 
 Run: `npm test -- SqliteGamificationRepository.test.ts`
 Expected: FAIL — `Cannot find module './SqliteGamificationRepository'`
 
-- [ ] **Step 4: Implement**
+- [x] **Step 4: Implement**
 
 ```typescript
 // src/data/sqlite/SqliteGamificationRepository.ts
@@ -1848,12 +1848,12 @@ function toStateRecord(row: typeof gamificationState.$inferSelect): Gamification
 }
 ```
 
-- [ ] **Step 5: Run tests to verify they pass**
+- [x] **Step 5: Run tests to verify they pass**
 
 Run: `npm test -- SqliteGamificationRepository.test.ts`
 Expected: PASS (4 tests)
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/data/repositories/GamificationRepository.ts src/data/sqlite/SqliteGamificationRepository.ts src/data/sqlite/SqliteGamificationRepository.test.ts
@@ -1870,7 +1870,7 @@ git commit -m "feat: add SQLite-backed GamificationRepository"
 **Interfaces:**
 - Consumes: `npm run lint`, `npm run typecheck`, `npm test` (Task 1).
 
-- [ ] **Step 1: Write the workflow**
+- [x] **Step 1: Write the workflow**
 
 ```yaml
 # .github/workflows/ci.yml
@@ -1897,11 +1897,11 @@ jobs:
       - run: npm test -- --ci
 ```
 
-- [ ] **Step 2: Validate the YAML locally**
+- [x] **Step 2: Validate the YAML locally**
 
 Run: `node -e "require('yaml').parse(require('fs').readFileSync('.github/workflows/ci.yml', 'utf8'))"` if the `yaml` package is available, otherwise visually confirm indentation is consistent (2 spaces) and every `- ` list item aligns under its parent key.
 
-- [ ] **Step 3: Commit and push**
+- [x] **Step 3: Commit and push**
 
 ```bash
 git add .github/workflows/ci.yml

@@ -37,7 +37,7 @@
 **Interfaces:**
 - Produces: a working NativeWind build pipeline — `className` props resolve to styles at runtime. No new exported TS interfaces.
 
-- [ ] **Step 1: Install dependencies**
+- [x] **Step 1: Install dependencies**
 
 Run:
 ```bash
@@ -46,7 +46,7 @@ npm install -D tailwindcss@^3.4.0
 npm install -D @testing-library/react-native
 ```
 
-- [ ] **Step 2: Create `babel.config.js`**
+- [x] **Step 2: Create `babel.config.js`**
 
 ```javascript
 module.exports = function (api) {
@@ -58,7 +58,7 @@ module.exports = function (api) {
 };
 ```
 
-- [ ] **Step 3: Create `metro.config.js`**
+- [x] **Step 3: Create `metro.config.js`**
 
 ```javascript
 const { getDefaultConfig } = require('expo/metro-config');
@@ -69,7 +69,7 @@ const config = getDefaultConfig(__dirname);
 module.exports = withNativeWind(config, { input: './global.css' });
 ```
 
-- [ ] **Step 4: Create `tailwind.config.js`**
+- [x] **Step 4: Create `tailwind.config.js`**
 
 ```javascript
 /** @type {import('tailwindcss').Config} */
@@ -83,7 +83,7 @@ module.exports = {
 };
 ```
 
-- [ ] **Step 5: Create `global.css`**
+- [x] **Step 5: Create `global.css`**
 
 ```css
 @tailwind base;
@@ -91,13 +91,13 @@ module.exports = {
 @tailwind utilities;
 ```
 
-- [ ] **Step 6: Create `nativewind-env.d.ts`**
+- [x] **Step 6: Create `nativewind-env.d.ts`**
 
 ```typescript
 /// <reference types="nativewind/types" />
 ```
 
-- [ ] **Step 7: Update `tsconfig.json` to include the new declaration file**
+- [x] **Step 7: Update `tsconfig.json` to include the new declaration file**
 
 ```json
 {
@@ -110,19 +110,19 @@ module.exports = {
 }
 ```
 
-- [ ] **Step 8: Add the CSS side-effect import to `App.tsx`**
+- [x] **Step 8: Add the CSS side-effect import to `App.tsx`**
 
 Add as the first import line in `App.tsx` (above the existing imports):
 ```typescript
 import './global.css';
 ```
 
-- [ ] **Step 9: Verify**
+- [x] **Step 9: Verify**
 
 Run: `npm run typecheck && npm run lint && npm test`
 Expected: all three stay clean (0 typecheck errors, 0 lint errors/warnings, 65 tests still passing — this task adds no new tests, it's pure config).
 
-- [ ] **Step 10: Commit**
+- [x] **Step 10: Commit**
 
 ```bash
 git add package.json package-lock.json babel.config.js metro.config.js tailwind.config.js global.css nativewind-env.d.ts tsconfig.json App.tsx
@@ -140,7 +140,7 @@ git commit -m "chore: install and configure NativeWind"
 **Interfaces:**
 - Produces: `ColorScheme` (`'light' | 'dark'`), `Tokens` (shape: `colors`, `typography`, `spacing`, `radius`), `tokensByScheme: Record<ColorScheme, Tokens>` — consumed by `ThemeProvider` (Task 3) and every component (Tasks 4-6).
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```typescript
 // src/design/tokens.test.ts
@@ -197,12 +197,12 @@ describe('tokensByScheme', () => {
 });
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `npm test -- tokens.test.ts`
 Expected: FAIL — `Cannot find module './tokens'`
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```typescript
 // src/design/tokens.ts
@@ -313,12 +313,12 @@ export const tokensByScheme: Record<ColorScheme, Tokens> = {
 };
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `npm test -- tokens.test.ts`
 Expected: PASS (9 tests)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/design/tokens.ts src/design/tokens.test.ts
@@ -337,7 +337,7 @@ git commit -m "feat: add design system tokens (colors, typography, spacing, radi
 - Consumes: `Tokens`, `ColorScheme`, `tokensByScheme` from `src/design/tokens.ts` (Task 2).
 - Produces: `ThemeProvider` (React component, accepts optional `scheme` override prop for testability), `useTheme(): Tokens` — consumed by every component in Tasks 4-6 and every future screen.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```tsx
 // src/design/ThemeProvider.test.tsx
@@ -393,12 +393,12 @@ describe('ThemeProvider / useTheme', () => {
 });
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `npm test -- ThemeProvider.test.tsx`
 Expected: FAIL — `Cannot find module './ThemeProvider'`
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```tsx
 // src/design/ThemeProvider.tsx
@@ -431,12 +431,12 @@ export function useTheme(): Tokens {
 }
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `npm test -- ThemeProvider.test.tsx`
 Expected: PASS (4 tests)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/design/ThemeProvider.tsx src/design/ThemeProvider.test.tsx
@@ -455,7 +455,7 @@ git commit -m "feat: add ThemeProvider and useTheme hook resolving system color 
 - Consumes: `useTheme` from `src/design/ThemeProvider.tsx` (Task 3) — used only to read `colors.accent`/`colors.surface` for inline style fallback where NativeWind can't express a dynamic token (see implementation note).
 - Produces: `Button` component with props `{ label: string; onPress: () => void; variant?: 'primary' | 'secondary' | 'tertiary'; disabled?: boolean }` — consumed by every future screen.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```tsx
 // src/design/components/Button.test.tsx
@@ -505,12 +505,12 @@ describe('Button', () => {
 });
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `npm test -- Button.test.tsx`
 Expected: FAIL — `Cannot find module './Button'`
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 NativeWind's `className` cannot express our exact token hex values without duplicating them into `tailwind.config.js`'s theme (out of scope for this task — that mapping is a later polish pass). For now, `Button` reads colors directly from `useTheme()` and applies them via the `style` prop, while still using NativeWind `className` for layout/shape (padding, radius, flex alignment) that doesn't depend on the token values. This keeps the component consumable today without blocking on a tailwind-theme-mapping task.
 
@@ -555,12 +555,12 @@ export function Button({ label, onPress, variant = 'primary', disabled = false }
 }
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `npm test -- Button.test.tsx`
 Expected: PASS (6 tests)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/design/components/Button.tsx src/design/components/Button.test.tsx
@@ -579,7 +579,7 @@ git commit -m "feat: add Button primitive with primary/secondary/tertiary varian
 - Consumes: `useTheme` from `src/design/ThemeProvider.tsx` (Task 3).
 - Produces: `Card` component with props `{ children: React.ReactNode; variant?: 'surface' | 'elevated' }` — consumed by every future screen (transaction rows, goal cards, friction sheet).
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```tsx
 // src/design/components/Card.test.tsx
@@ -623,12 +623,12 @@ describe('Card', () => {
 });
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `npm test -- Card.test.tsx`
 Expected: FAIL — `Cannot find module './Card'`
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```tsx
 // src/design/components/Card.tsx
@@ -653,12 +653,12 @@ export function Card({ children, variant = 'surface' }: CardProps) {
 }
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `npm test -- Card.test.tsx`
 Expected: PASS (3 tests)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/design/components/Card.tsx src/design/components/Card.test.tsx
@@ -679,7 +679,7 @@ git commit -m "feat: add Card primitive with surface/elevated variants"
 - Consumes: `Money`, `toMajor` from `src/lib/money.ts`; `useTheme` from `src/design/ThemeProvider.tsx` (Task 3).
 - Produces: `formatMoney(money: Money): string` (added to `src/lib/money.ts`), `AmountText` component with props `{ money: Money; kind?: 'income' | 'expense' | 'neutral'; style?: 'display' | 'body' | 'bodyStrong' }` — consumed by every future screen showing a money value.
 
-- [ ] **Step 1: Write the failing test for formatMoney**
+- [x] **Step 1: Write the failing test for formatMoney**
 
 Add to the end of `src/lib/money.test.ts` (do not remove existing tests):
 ```typescript
@@ -702,12 +702,12 @@ And update the import line at the top of the file to include `formatMoney`:
 import { money, fromMajor, toMajor, addMoney, subtractMoney, convertMoney, formatMoney } from './money';
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- money.test.ts`
 Expected: FAIL — `formatMoney is not a function` (or `TypeError`)
 
-- [ ] **Step 3: Implement formatMoney**
+- [x] **Step 3: Implement formatMoney**
 
 Add to the end of `src/lib/money.ts`:
 ```typescript
@@ -716,12 +716,12 @@ export function formatMoney(value: Money): string {
 }
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `npm test -- money.test.ts`
 Expected: PASS (12 tests — 9 existing + 3 new)
 
-- [ ] **Step 5: Write the failing test for AmountText**
+- [x] **Step 5: Write the failing test for AmountText**
 
 ```tsx
 // src/design/components/AmountText.test.tsx
@@ -771,12 +771,12 @@ describe('AmountText', () => {
 });
 ```
 
-- [ ] **Step 6: Run tests to verify they fail**
+- [x] **Step 6: Run tests to verify they fail**
 
 Run: `npm test -- AmountText.test.tsx`
 Expected: FAIL — `Cannot find module './AmountText'`
 
-- [ ] **Step 7: Implement**
+- [x] **Step 7: Implement**
 
 ```tsx
 // src/design/components/AmountText.tsx
@@ -809,17 +809,17 @@ export function AmountText({ money: value, kind = 'neutral', style = 'body' }: A
 }
 ```
 
-- [ ] **Step 8: Run tests to verify they pass**
+- [x] **Step 8: Run tests to verify they pass**
 
 Run: `npm test -- AmountText.test.tsx`
 Expected: PASS (5 tests)
 
-- [ ] **Step 9: Full suite check**
+- [x] **Step 9: Full suite check**
 
 Run: `npm run typecheck && npm run lint && npm test`
 Expected: 0 typecheck errors, 0 lint errors/warnings, all tests passing (65 + 3 formatMoney + 4 ThemeProvider + 6 Button + 3 Card + 5 AmountText + 9 tokens = 95 total — recount from actual output, don't assume this number is exact).
 
-- [ ] **Step 10: Commit**
+- [x] **Step 10: Commit**
 
 ```bash
 git add src/lib/money.ts src/lib/money.test.ts src/design/components/AmountText.tsx src/design/components/AmountText.test.tsx
