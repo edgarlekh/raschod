@@ -18,6 +18,9 @@
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "~4.26.0"
   },
+  "overrides": {
+    "react-dom": "19.2.3"
+  },
   "devDependencies": {
     "@testing-library/react-native": "^14.0.1",
     "babel-preset-expo": "~57.0.0",
