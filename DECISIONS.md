@@ -1,5 +1,45 @@
 # Decisions Log
 
+## 2026-09-21 — БЛОКЕР: нет прав на запись в GitHub, коммиты не запушены
+
+Сессия готова (2 коммита поверх `59c8b0e`, все локально: `npm ci`,
+`npm run lint`, `npm run typecheck`, `npm test` чистые — 23 suites, 121
+тест), но **не смогла запушить их в `origin/main`** — пробовал два
+разных способа, оба отказали:
+
+1. `git push origin main` → proxy возвращает 403: "Claude doesn't have
+   GitHub access to edgarlekh/raschod for your organization. An org
+   admin can install the Claude GitHub App...".
+2. `mcp__github__create_or_update_file` (запись через GitHub API,
+   маленький файл `package.json`, не весь lockfile) → тоже 403:
+   "Resource not accessible by integration". Значит проблема не в
+   размере файла (я сначала думал обойти это через API, раз git push
+   заблокирован) — у этой сессии просто нет прав на запись в репозиторий
+   вообще, ни через git, ни через API. Чтение (список коммитов, CI-раны
+   через `mcp__github__actions_list`) работает, запись — нет.
+
+Локальные коммиты (не запушены, на ветке `main` этого чекаута):
+- `f6d9f60` — `fix: pin react-dom to react's version to unbreak npm ci`
+  (добавляет `"overrides": {"react-dom": "19.2.3"}` в `package.json`,
+  минимальный диф `package-lock.json`, ~70 строк вместо полной
+  регенерации).
+- `21d88a6` — `docs: backfill plan checkboxes and log CI/status
+  findings` (простановка чекбоксов в трёх планах + первая версия этой
+  записи).
+
+**Что нужно, чтобы разблокировать:** либо установить/переустановить
+Claude GitHub App с правом записи для `edgarlekh/raschod` (ссылка была
+в тексте 403), либо кто-то с реальным доступом должен сам сделать
+`git push` из этого чекаута (коммиты уже готовы и проверены), либо
+следующая сессия с рабочим доступом на запись повторяет `git push`.
+
+**Корневая причина самого бага (для контекста, независимо от блокера
+выше):** CI красный на каждом пуше начиная с `b62c829` (установка Expo
+Router, 2026-09-14) — `npm ci` падает с ERESOLVE-конфликтом
+(`react-dom@19.3.0` тянет `react@^19.3.0`, а `react-native` фиксирует
+`react@19.2.3`). Фикс (`overrides` в `package.json`) готов и проверен
+локально, просто не доехал до GitHub.
+
 ## 2026-09-21 — Статус: все три существующих плана выполнены, CI был красным
 
 Автоматическая сессия должна была продолжить с первого невыполненного
