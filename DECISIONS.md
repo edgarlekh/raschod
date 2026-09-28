@@ -1,5 +1,23 @@
 # Decisions Log
 
+## 2026-09-28 (twentieth run) — Status unchanged; no re-notification
+
+Twentieth consecutive automated run, same result. Independently re-verified
+from scratch: 0 unchecked boxes across all three plan files (153 `[x]`, 0
+`[ ]`: `foundation-domain-layer.md` 83/83, `design-system-foundation.md`
+40/40, `app-shell-navigation.md` 30/30), `docs/superpowers/plans/` still
+contains only these three files, no new plan or spec files. At session
+start the local checkout was on detached HEAD exactly at `origin/main`
+(`05b4895`, the nineteenth run's entry) — checked out `main`, `git merge
+--ff-only origin/main`, a clean fast-forward of 19 commits (prior docs
+entries only, no code commits). `npm ci && npm run lint && npm run
+typecheck && npm test` — all clean (23 suites, 121 tests, 0 errors). The
+recommendation from the sixth run (write a new plan file for the
+history/add-transaction screen, or pause the schedule) still stands — the
+schedule keeps firing sessions with nothing to do (20 runs in a row with no
+new code changes). Stopping with no code changes and no notification, since
+status has not changed since the last run.
+
 ## 2026-09-28 (девятнадцатый прогон) — Статус не изменился; без нового уведомления
 
 Девятнадцатый подряд автоматический прогон с тем же результатом.
