@@ -1,5 +1,25 @@
 # Decisions Log
 
+## 2026-10-01 (thirty-second run) — Status unchanged; no re-notification
+
+Thirty-second consecutive automated run, same result. Independently
+re-verified from scratch: 0 unchecked boxes across all three plan files
+(153 `[x]`, 0 `[ ]`: `foundation-domain-layer.md` 83/83,
+`design-system-foundation.md` 40/40, `app-shell-navigation.md` 30/30).
+`docs/superpowers/plans/` still contains only these three files;
+`docs/superpowers/specs/` still has only the two addendums plus the
+design doc, no new plan. Local checkout was on detached HEAD exactly at
+`origin/main` (`279efab`, the thirty-first run's entry); the local
+`main` branch ref itself was stale at `d1adcb3` (3 commits behind,
+docs-only) — `git checkout main && git merge --ff-only origin/main`
+fast-forwarded cleanly, no divergence. `npm ci && npm run lint && npm
+run typecheck && npm test` — all clean (23 suites, 121 tests, 0
+errors). The sixth run's recommendation (write a new plan file for the
+history/add-transaction screen, or pause the schedule) still stands,
+unactioned, after 32 runs with no code changes. Stopping with no code
+changes and no notification, since status has not changed since the
+last run.
+
 ## 2026-10-01 (thirty-first run) — Status unchanged; no re-notification
 
 Thirty-first consecutive automated run, same result. Independently
