@@ -1,5 +1,23 @@
 # Decisions Log
 
+## 2026-10-01 (thirtieth run) — Status unchanged; no re-notification
+
+Thirtieth consecutive automated run, same result. Independently
+re-verified from scratch: 0 unchecked boxes across all three plan files
+(153 `[x]`, 0 `[ ]`: `foundation-domain-layer.md` 83/83,
+`design-system-foundation.md` 40/40, `app-shell-navigation.md` 30/30).
+`docs/superpowers/plans/` still contains only these three files;
+`docs/superpowers/specs/` still has only the two addendums plus the
+design doc, no new plan. Local checkout was on detached HEAD exactly at
+`origin/main` (`49a3975`, the twenty-ninth run's entry) — checked out
+`main`, fast-forwarded 1 commit (docs-only), no divergence. `npm ci &&
+npm run lint && npm run typecheck && npm test` — all clean (23 suites,
+121 tests, 0 errors). The sixth run's recommendation (write a new plan
+file for the history/add-transaction screen, or pause the schedule)
+still stands, unactioned, after 30 runs with no code changes. Stopping
+with no code changes and no notification, since status has not changed
+since the last run.
+
 ## 2026-10-01 (twenty-ninth run) — Status unchanged; no re-notification
 
 Twenty-ninth consecutive automated run, same result. Independently
