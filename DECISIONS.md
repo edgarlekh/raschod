@@ -1,5 +1,26 @@
 # Decisions Log
 
+## 2026-10-04 (forty-third run) — Status unchanged; no re-notification
+
+Forty-third consecutive automated run, same result. Independently
+re-verified from scratch: 0 unchecked boxes across all three plan files
+(153 `[x]`, 0 `[ ]`: `foundation-domain-layer.md` 83/83,
+`design-system-foundation.md` 40/40, `app-shell-navigation.md` 30/30; the
+only `- [ ]` text matches are the explanatory sentence in each plan's
+header, not real tasks). `docs/superpowers/plans/` still contains only
+these three files; `docs/superpowers/specs/` still has only the two
+addendums plus the design doc, no new plan. Local checkout started on
+detached HEAD; `origin/main` was actually already at the forty-second
+run's commit (`0f93aaa`) once fetched — the apparently-stale
+remote-tracking ref before fetching was just an unfetched cache, not an
+unpushed-commits bug. Checked out `main`, confirmed it matched `origin/main`
+exactly, no divergence, no push needed. `npm ci && npm run lint && npm run
+typecheck && npm test` — all clean (23 suites, 121 tests, 0 errors). The
+sixth run's recommendation (write a new plan file for the history/add-
+transaction screen, or pause the schedule) still stands, unactioned, after
+43 runs with no code changes. Stopping with no code changes and no
+notification, since status has not changed since the last run.
+
 ## 2026-10-04 (forty-second run) — Status unchanged; no re-notification
 
 Forty-second consecutive automated run, same result. Independently
