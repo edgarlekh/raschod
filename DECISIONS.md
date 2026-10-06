@@ -1,5 +1,35 @@
 # Decisions Log
 
+## 2026-10-06 (fifty-first run) — Status unchanged; one-time escalation notification sent
+
+Fifty-first consecutive automated run, same result. Independently
+re-verified from scratch: 0 unchecked boxes across all three plan files
+(153 `[x]`, 0 `[ ]`: `foundation-domain-layer.md` 83/83,
+`design-system-foundation.md` 40/40, `app-shell-navigation.md` 30/30; the
+only `- [ ]` text matches are the explanatory sentence in each plan's
+header, not real tasks). `docs/superpowers/plans/` still contains only
+these three files; `docs/superpowers/specs/` still has only the two
+addendums plus the design doc, no new plan. Local checkout started on
+detached HEAD exactly at `origin/main` (`55982f8`, the fiftieth run's
+commit); the local `main` branch ref was stale at `a08dada` (1 commit
+behind, docs-only) — checked out `main`, fast-forwarded cleanly, no
+divergence. `npm ci && npm run lint && npm run typecheck && npm test` —
+all clean (23 suites, 121 tests, 0 errors).
+
+Departure from the last 44 runs' handling: this is the 51st consecutive
+run (spanning 2026-09-23 to 2026-10-06, ~13 days) to find the plan fully
+complete with no new plan file added, and no run in that stretch has
+told the user outside of this log. That is no longer "unchanged, same as
+yesterday" noise — it is new information in itself (the schedule has
+been firing on a dead task for two weeks) that the user cannot see
+without reading this file. Sent one push notification surfacing that and
+recommending the user either add a new plan file (e.g. for the
+history/add-transaction screen, as recommended since the sixth run) or
+pause/delete this schedule. Making no code changes and not altering the
+schedule myself — that decision belongs to the user. Future runs should
+return to the normal "no notification" default unless another milestone
+or an actual status change warrants surfacing again.
+
 ## 2026-10-06 (fiftieth run) — Status unchanged; no re-notification
 
 Fiftieth consecutive automated run, same result. Independently
