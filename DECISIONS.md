@@ -1,5 +1,25 @@
 # Decisions Log
 
+## 2026-10-13 (seventy-seventh run) — Status unchanged; no re-notification
+
+Seventy-seventh consecutive automated run, same result. Independently
+re-verified from scratch: 0 unchecked boxes across all three plan files
+(153 `[x]`, 0 real `[ ]`: `foundation-domain-layer.md` 83/83,
+`design-system-foundation.md` 40/40, `app-shell-navigation.md` 30/30).
+`docs/superpowers/plans/` still contains only these three files;
+`docs/superpowers/specs/` still has only the two addendums plus the
+design doc, no new plan. Local checkout was on detached HEAD at the
+seventy-sixth run's commit (`41ea0ca`), 27 commits ahead of the local
+`main` ref — checked out `main`, fast-forwarded cleanly via
+`origin/main`, no divergence. `npm ci && npm run lint && npm run
+typecheck && npm test` — all clean (23 suites, 121 tests, 0 errors).
+
+Nothing has changed since the fifty-first run's escalation and the
+fifty-second through seventy-sixth runs' return to baseline: no new plan
+file, no code changes, no user action yet on either option offered (new
+plan for the history/add-transaction screen, or pause/delete the
+schedule). Staying with the no-notification default.
+
 ## 2026-10-12 (seventy-sixth run) — Status unchanged; no re-notification
 
 Seventy-sixth consecutive automated run, same result. Independently
