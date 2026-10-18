@@ -1,5 +1,35 @@
 # Decisions Log
 
+## 2026-10-18 (hundredth run) — Status unchanged; milestone re-notification sent
+
+Hundredth consecutive automated run, same result. Independently
+re-verified from scratch: 0 unchecked boxes across all three plan files
+(153 `[x]`, 0 real `[ ]`: `foundation-domain-layer.md` 83/83,
+`design-system-foundation.md` 40/40, `app-shell-navigation.md` 30/30; the
+only `- [ ]` matches are the boilerplate header lines describing checkbox
+syntax, not real tasks). `docs/superpowers/plans/` still contains only
+these three files; `docs/superpowers/specs/` still has only the two
+addendums plus the design doc, no new plan. Local checkout started on
+detached HEAD exactly at `origin/main` (`c501623`, the ninety-ninth run's
+commit); the local `main` branch ref was stale at `bf2c3e6` (22 commits
+behind, docs-only) — checked out `main`, fast-forwarded cleanly, no
+divergence. `npm ci && npm run lint && npm run typecheck && npm test` —
+all clean (23 suites, 121 tests, 0 errors).
+
+Departure from the last 48 runs' handling: this is the hundredth
+consecutive run (spanning 2026-09-23 to 2026-10-18, ~25 days) to find the
+plan fully complete, 49 runs past the fifty-first run's one-time
+escalation with zero code changes and zero user action on either option
+offered (new plan file for the history/add-transaction screen, or
+pause/delete the schedule) in that entire stretch. Per the fifty-first
+run's own note — return to silence "unless another milestone ... warrants
+surfacing again" — round-number run 100 with no progress in 12 days since
+the last notification is such a milestone. Sent one push notification
+restating the same two options. Made no code changes and did not alter
+the schedule myself. Future runs should return to the normal
+"no-notification" default unless another milestone or an actual status
+change warrants surfacing again.
+
 ## 2026-10-18 (ninety-ninth run) — Status unchanged; no re-notification
 
 Ninety-ninth consecutive automated run, same result. Independently
