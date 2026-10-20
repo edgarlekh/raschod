@@ -1,5 +1,26 @@
 # Decisions Log
 
+## 2026-10-20 (hundred-sixth run) — Status unchanged; no re-notification
+
+Hundred-sixth consecutive automated run, same result. Independently
+re-verified from scratch: 0 real unchecked boxes across all three plan
+files (153 `[x]`, 0 `[ ]` task items: `foundation-domain-layer.md` 83/83,
+`design-system-foundation.md` 40/40, `app-shell-navigation.md` 30/30).
+`docs/superpowers/plans/` still contains only these three files;
+`docs/superpowers/specs/` still has only the two addendums plus the
+design doc and reference assets, no new plan. Local checkout started on
+detached HEAD exactly at the hundred-fifth run's commit (`abf5a32`),
+one commit ahead of local `main` (`0fbd975`) because that commit had
+already been pushed to `origin/main` but the local branch ref was
+stale; checked out `main` and fast-forwarded to `origin/main`
+(`abf5a32`), no divergence. `npm ci && npm run lint && npm run
+typecheck && npm test` — all clean (23 suites, 121 tests, 0 errors).
+
+The hundredth run's milestone re-notification (2026-10-18) still has no
+user response. Run 106 is neither a round milestone nor an actual
+status change, so per the established cadence from the fifty-first and
+hundredth runs, staying with the no-notification default.
+
 ## 2026-10-20 (hundred-fifth run) — Status unchanged; no re-notification
 
 Hundred-fifth consecutive automated run, same result. Independently
