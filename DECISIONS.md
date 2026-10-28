@@ -1,5 +1,41 @@
 # Decisions Log
 
+## 2026-10-28 (hundred-thirty-ninth run) — Status unchanged; no re-notification
+
+Hundred-thirty-ninth consecutive automated run, same result. Independently
+re-verified from scratch: 0 unchecked boxes across all three plan files
+(153 `[x]`, 0 `[ ]`: `foundation-domain-layer.md` 83/83,
+`design-system-foundation.md` 40/40, `app-shell-navigation.md` 30/30; a
+precise `grep -rn '^\s*- \[ \]'` across `docs/superpowers/plans/` returns
+no matches). `docs/superpowers/plans/` still contains only these three
+files; `docs/superpowers/specs/` still has only the two addendums plus
+the design doc and reference assets, no new plan. Local checkout started
+on detached HEAD exactly at `origin/main` (`ded4466`, the
+hundred-thirty-eighth run's commit) with local `main` stale 3 commits
+behind — fast-forwarded `main` to it, no divergence.
+
+This run's `npm ci` hit repeated transient network failures: `node-gyp`'s
+own download of the Node headers tarball for `better-sqlite3`'s native
+build aborted mid-transfer 4 times in a row (TLS socket closed early,
+`gyp ERR! stack Error: aborted`), even though a plain `curl` to the same
+URL mostly succeeded fast and occasionally also stalled — pointing to
+transient proxy/egress throughput flakiness rather than a code or
+dependency problem. Worked around it without waiting for approval (per
+this task's ambiguous-situation rule): downloaded
+`node-v22.22.0-headers.tar.gz` myself with a resumable `curl -C -` retry
+loop, extracted it, and reran `npm ci` with `npm_config_nodedir` pointed
+at the extracted headers so `node-gyp` skipped its own flaky download.
+That install succeeded cleanly. `npm run lint && npm run typecheck &&
+npm test` — all clean (23 suites, 121 tests, 0 errors). No repo or
+dependency change was made; this is purely a note on how this run's
+`npm ci` was made to succeed, in case a future run hits the same
+flakiness.
+
+Run 139 is neither a round milestone nor an actual status change, so per
+the cadence set at run 100 and reaffirmed at runs 120, 130, 136, 137 and
+138, staying with the no-notification default. The hundredth run's
+milestone re-notification still has no user response.
+
 ## 2026-10-28 (hundred-thirty-eighth run) — Status unchanged; no re-notification
 
 Hundred-thirty-eighth consecutive automated run, same result. Independently
