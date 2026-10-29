@@ -1,5 +1,27 @@
 # Decisions Log
 
+## 2026-10-29 (hundred-forty-fourth run) — Status unchanged; no re-notification
+
+Hundred-forty-fourth consecutive automated run, same result. Independently
+re-verified from scratch: 0 unchecked boxes across all three plan files
+(153 `[x]`, 0 `[ ]`: `foundation-domain-layer.md` 83/83,
+`design-system-foundation.md` 40/40, `app-shell-navigation.md` 30/30; a
+precise `grep -rn '^\s*- \[ \]'` across `docs/superpowers/plans/` returns
+no matches). `docs/superpowers/plans/` still contains only these three
+files; `docs/superpowers/specs/` still has only the two addendums plus
+the design doc, no new plan. Local checkout started on detached HEAD
+behind `origin/main` (at the hundred-thirty-fifth run's commit `ad8a608`,
+8 commits stale) — fast-forwarded local `main` to `origin/main`
+(`8d1d2e9`, the hundred-forty-third run's commit), no divergence. `npm
+ci && npm run lint && npm run typecheck && npm test` — all clean (23
+suites, 121 tests, 0 errors).
+
+Run 144 is neither a round milestone (cadence keys on hundreds; next is
+200) nor an actual status change, so per the cadence set at run 100 and
+reaffirmed through run 143, staying with the no-notification default.
+The hundredth run's milestone re-notification still has no user
+response.
+
 ## 2026-10-29 (hundred-forty-third run) — Status unchanged; no re-notification
 
 Hundred-forty-third consecutive automated run, same result. Independently
